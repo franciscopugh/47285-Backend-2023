@@ -32,7 +32,23 @@ app.use('/static', express.static(path.join(__dirname, '/public'))) //Unir rutas
 app.use('/api/products', prodsRouter)
 
 app.get('/static', (req, res) => {
-    res.render('home')
+    const user = {
+        nombre: "Maria",
+        cargo: "Tutor"
+    }
+
+    const cursos = [
+        { numCurso: 123, dia: "S", horario: "Mañana" },
+        { numCurso: 456, dia: "MyJ", horario: "Tarde" },
+        { numCurso: 789, dia: "LyM", horario: "Noche" }
+    ]
+    res.render('home', {
+        user: user,
+        css: "home.css",
+        title: "Home",
+        esTutor: user.cargo === "Tutor",
+        cursos: cursos
+    })
 })
 
 app.post('/upload', upload.single('product'), (req, res) => {

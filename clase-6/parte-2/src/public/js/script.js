@@ -32,6 +32,7 @@ botonChat.addEventListener('click', () => {
     if (valInput.value.trim().length > 0) {
         socket.emit('mensaje', { fecha: fechaActual, user: user, mensaje: valInput.value })
         valInput.value = ""
+        socket.on()
     }
 })
 

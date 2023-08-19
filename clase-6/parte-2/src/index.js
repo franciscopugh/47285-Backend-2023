@@ -36,6 +36,7 @@ app.use('/static', express.static(path.join(__dirname, '/public'))) //Unir rutas
 //Server Socket.io
 const io = new Server(serverExpress)
 const mensajes = []
+const prods = []
 io.on('connection', (socket) => {
     console.log("Servidor Socket.io conectado")
     socket.on('mensajeConexion', (user) => {
@@ -52,6 +53,13 @@ io.on('connection', (socket) => {
         socket.emit('mensajes', mensajes)
     })
 
+    socket.on('nuevoProducto', (nuevoProd) => {
+        prods.push(nuevoProd)
+        socket.emit('prods', prods)
+    })
+
+
+
 })
 
 //Routes
@@ -59,9 +67,10 @@ io.on('connection', (socket) => {
 app.use('/api/products', prodsRouter)
 
 app.get('/static', (req, res) => {
-    res.render('chat', {
+    res.render('realTimeProducts', {
         css: "style.css",
         title: "Chat",
+        js: "realTimeProducts.js"
 
     })
 })

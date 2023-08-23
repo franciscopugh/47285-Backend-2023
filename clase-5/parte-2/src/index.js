@@ -1,8 +1,10 @@
 import express from 'express'
 import multer from 'multer'
 import prodsRouter from "./routes/products.routes.js";
+import cartRouter from './routes/carts.routes.js';
 import { __dirname } from './path.js';
 import { engine } from 'express-handlebars';
+
 import path from 'path';
 
 const PORT = 4000
@@ -30,7 +32,7 @@ app.use('/static', express.static(path.join(__dirname, '/public'))) //Unir rutas
 
 //Routes
 app.use('/api/products', prodsRouter)
-
+app.use('/api/carts', cartRouter)
 app.get('/static', (req, res) => {
     const user = {
         nombre: "Maria",

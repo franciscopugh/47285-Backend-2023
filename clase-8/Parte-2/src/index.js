@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
 import userRouter from './routes/users.routes.js'
@@ -8,7 +9,7 @@ import { userModel } from './models/users.models.js'
 const app = express()
 const PORT = 4000
 
-mongoose.connect('mongodb+srv://franciscopugh01:password@cluster0.pkfhkpt.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URL)
     .then(async () => {
         console.log('BDD conectada')
         //Filtro - 
